@@ -1,0 +1,33 @@
+Bootstrapping for UX/HF Researchers
+This repository is for UX and Human Factors (HF) researchers who want a simple setup to get started with data analysis and workflows in R. Whether you’re cleaning data, running statistical analyses, or creating visualizations, this project provides a basic framework to build on.
+ 
+What’s Included?
+•	main.R: The main R script for processing data and performing analysis.
+•	data/: A folder to organize datasets: 
+o	raw/: For unprocessed data.
+o	processed/: For cleaned or analyzed data.
+o	example.csv: A sample dataset to test the script.
+•	README.md: This file, with details about the repository.
+•	LICENSE: Information about the open-source license.
+ 
+How to Use This
+1.	Clone this repository:
+2.	git clone https://github.com/mohsen-rafiei/Bootstrapping.git
+3.	cd Bootstrapping
+4.	Set up your data:
+o	Place raw datasets in the data/raw/ folder.
+5.	Run the main script:
+Open main.R in your preferred R environment (RStudio or any IDE) and follow the instructions in the script.
+6.	Processed datasets and results will be saved in the data/processed/ folder.
+ 
+Purpose
+This repository is designed to save time and effort by providing a simple framework for UX and HF research projects. It’s lightweight and easy to customize for your specific needs.
+ 
+Contributing
+If you’d like to contribute, feel free to open an issue or submit a pull request. Suggestions and improvements are always welcome.
+ 
+License
+This project is open-source under the MIT License. You’re free to use, modify, and share it with proper attribution.
+ 
+Let me know if you need help with the R script or any additional features.
+
