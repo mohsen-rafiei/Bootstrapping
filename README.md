@@ -46,5 +46,4 @@ Found a bug or have a suggestion? Feel free to open an issue or submit a pull re
 License
 This project is open-source under the MIT License. Use it, modify it, and share it, just give credit where it’s due.
 
-![image](https://github.com/user-attachments/assets/df36a658-efc9-470c-9d39-17276f88ab10)
 
