@@ -1,0 +1,74 @@
+---
+title: "Bootstrapping"
+author: "Mohsen rafiei"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo=TRUE}
+# This is a quick and casual analysis of our UX/HF dataset.
+# Let's load some libraries first.
+library(tidyverse)
+
+# Load the dataset (assuming it's in the same folder as this Rmd file)
+data <- read.csv("ux_hf_sample_data.csv")
+
+# Take a quick look at the data
+head(data)
+summary(data)
+
+# Cleaning and preprocessing the data
+data <- data %>%
+  mutate(
+    Gender = as.factor(Gender), # Converting Gender to a factor
+    Stress_Level = as.numeric(Stress_Level) # Ensuring Stress_Level is numeric
+  )
+
+# Check for missing values
+if (any(is.na(data))) {
+  print("Oops, there are missing values. Let's fix them.")
+} else {
+  print("Data looks clean. Moving on!")
+}
+
+# Basic analysis: Calculating averages
+avg_time <- mean(data$Task_Completion_Time)
+avg_accuracy <- mean(data$Accuracy)
+avg_stress <- mean(data$Stress_Level)
+
+cat("Average task completion time:", round(avg_time, 2), "seconds\n")
+cat("Average accuracy:", round(avg_accuracy, 2), "%\n")
+cat("Average stress level:", round(avg_stress, 2), "/10\n")
+
+# Visualizing the distribution of task completion time
+ggplot(data, aes(x = Task_Completion_Time)) +
+  geom_histogram(binwidth = 10, fill = "steelblue", color = "black") +
+  labs(title = "Task Completion Time Distribution", x = "Time (seconds)", y = "Count")
+
+# Visualizing accuracy vs stress level
+ggplot(data, aes(x = Stress_Level, y = Accuracy, color = Gender)) +
+  geom_point(size = 3) +
+  geom_smooth(method = "lm", se = FALSE, linetype = "dashed") +
+  labs(title = "Accuracy vs Stress Level", x = "Stress Level (1-10)", y = "Accuracy (%)") +
+  theme_minimal()
+
+# Bootstrap analysis: Mean of task completion time
+bootstrap_means <- replicate(1000, {
+  sample_time <- sample(data$Task_Completion_Time, replace = TRUE)
+  mean(sample_time)
+})
+
+# Plotting the bootstrap distribution
+ggplot(data.frame(Mean_Time = bootstrap_means), aes(x = Mean_Time)) +
+  geom_histogram(binwidth = 1, fill = "orange", color = "black") +
+  labs(title = "Bootstrap Distribution of Task Completion Time", x = "Mean Time (seconds)", y = "Frequency") +
+  theme_minimal()
+
+# Confidence interval for the bootstrapped means
+ci <- quantile(bootstrap_means, probs = c(0.025, 0.975))
+cat("95% CI for task completion time mean:", round(ci[1], 2), "to", round(ci[2], 2), "seconds\n")
+
+# That's it! Feel free to tweak the code for more analyses or visualizations.
